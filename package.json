@@ -1,0 +1,13 @@
+{
+    "name": "typing",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {},
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "next": "^11.1.2",
+        "react": "^17.0.2"
+    }
+}
