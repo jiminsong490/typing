@@ -5,62 +5,53 @@ import Link from 'next/link'
 import GoalText from './../goalText/GoalText'
 import useSWR from 'swr'
 import typing from './../../pages/typing'
+import TextareaTool from '../textarea/TextareaTool'
 
 const Typing = (props) => {
-    const [idx1, setIdx1] = useState('2')
-    const [idx2, setIdx2] = useState('1')
+    const [idx1, setIdx1] = useState(80)
+    const [idx2, setIdx2] = useState(30)
 
-    const a = ExcuteApi.randomText(idx1, idx2)
-
+    // const a = ExcuteApi.randomText(2)
     const handleSubmit = (e) => {
         e.preventDefault()
         let randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        if (idx2 == `${randomNumber}`) {
-            randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        }
-
-        if (e.target.typing.value.length == a.presentText.length) {
-            console.log('ddd')
-            setIdx1(`${idx2}`)
-            setIdx2(`${randomNumber}`)
-        }
 
         // if(e.target.typing.value==e.)
     }
 
     return (
         <>
-            <form method='post' onSubmit={handleSubmit}>
+            <header>
                 <div>
-                    <p>{a.presentText}</p>
+                    <p>로고</p>
                 </div>
-                <div>
-                    <Inputtool
-                        name='typing'
-                        type='text'
-                        placeholder='위에 보이는 문장을 따라 타이핑해보세요.'
-                        size='50'
-                        autocomplete='off'
-                        presentText={idx1}
-                        nextText={idx2}
-                        text={a.presentText}
-                    />
-                </div>
-                <div>
-                    <p>NEXT : {a.nextText}</p>
-                </div>
-                <br />
-                <div>
-                    <Link href='/insertTextPage'>
-                        <a>
-                            <input type='button' value='텍스트 입력' />
-                        </a>
-                    </Link>
-                </div>
-                <div>
-                    <p>타자 속도 : {}</p>
-                </div>
-            </form>
+                <nav>
+                    <section>
+                        <input type='button' value='언어' />
+                    </section>
+                    <section>
+                        <input type='button' value='파일 업로드' />
+                    </section>
+                    <section>
+                        <input type='button' value='공유' />
+                    </section>
+                </nav>
+            </header>
+            <main>
+                <form method='post' onSubmit={handleSubmit}>
+                    <div>
+                        <TextareaTool name='typing' cols={idx1} rows={idx2} />
+                    </div>
+                    <br />
+                    <div>
+                        <Link href='/insertTextPage'>
+                            <a>
+                                <input type='button' value='텍스트 입력' />
+                            </a>
+                        </Link>
+                    </div>
+                </form>
+            </main>
         </>
     )
 }

@@ -57,9 +57,6 @@ const Inputtool = (props) => {
 
     return (
         <>
-            {/* <div>
-                <p>{presentText}</p>
-            </div> */}
             <div>
                 <input
                     id={props.id}
@@ -73,14 +70,6 @@ const Inputtool = (props) => {
                     onKeyDown={handleKeyDown}
                 />
             </div>
-
-            {/* <div>
-                <p>NEXT : {nextText}</p>
-            </div> */}
-            <div>
-                <p>{typingSpeed}</p>
-            </div>
-            <div>{/* <p>{start}</p> */}</div>
         </>
     )
 }
