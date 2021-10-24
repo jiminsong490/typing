@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Typing from '../components/Typing/Typing'
 import cookies from 'next-cookies'
 import ExcuteApi from '../apis/ExcuteApi'
 
 const typing = (props) => {
-    return <Typing token={props.token} />
+    const [idx1, setIdx1] = useState('2')
+    const typingText = ExcuteApi.randomText(idx1)
+    return (
+        <>
+            {typingText && typingText != undefined && (
+                <Typing token={props.token} text={typingText} />
+            )}
+        </>
+    )
 }
 typing.getInitialProps = async (ctx) => {
     const { token } = cookies(ctx)

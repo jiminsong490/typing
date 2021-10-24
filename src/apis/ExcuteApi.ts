@@ -12,7 +12,7 @@ const ExcuteApi = {
             `http://127.0.0.1:3712/randomText?text=${idx}`
         )
         const text = data?.text
-        return { text }
+        return text
     },
 }
 export default ExcuteApi

@@ -1,15 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import ExcuteApi from '../../apis/ExcuteApi'
+import GoalText from '../goalText/GoalText'
 
 const Inputtool = (props) => {
-    let idx = props.presentText
-    let nextIdx = props.nextText
-    // const a = ExcuteApi.randomText(idx, nextIdx)
-    // console.log(a.presentText)
-    // console.log(a.nextText)
-    // console.log(idx, nextIdx)
-
     const [text, setText] = useState('')
     const [typingCount, setCount] = useState(0)
     const [typingSpeed, setSpeed] = useState(0)
@@ -17,24 +11,33 @@ const Inputtool = (props) => {
     const [start, setStart] = useState(new Date())
     const [end, setEnd] = useState(new Date())
     const [seconds, setSeconds] = useState(0)
-    // const [presentText, setpText] = useState(a?.presentText)
-    // const [nextText, setnText] = useState(a?.nextText)
+    const [bTN, setbTn] = useState(0)
+
+    const it = useRef(null)
+
+    useEffect(() => {
+        it.current.focus()
+    }, [])
+
+    const baseText = props.text.split('\n')
+    // console.log(a[0])
 
     const handleChange = (e) => {
         e.preventDefault()
         setEnd(new Date())
         setSeconds(end.getSeconds() - start.getSeconds())
 
-        console.log(seconds)
+        // console.log(seconds)
         setText(e.target.value)
         setCount(typingCount + 1)
         setSpeed((typingCount * 60) / seconds - 20 * backspace)
-
+        console.log(baseText[bTN].length, e.target.value.length)
         // console.log(typingSpeed)
-        if (props.text?.length + 1 == e.target.value.length) {
+        if (baseText[bTN].length == e.target.value.length) {
             setText('')
             setCount(0)
             setBack(1)
+            setbTn(bTN + 1)
         } else if (text == '') {
             setStart(new Date())
         }
@@ -57,12 +60,12 @@ const Inputtool = (props) => {
 
     return (
         <>
-            {/* <div>
-                <p>{presentText}</p>
-            </div> */}
+            <div>
+                <p>1 : {baseText[bTN]}</p>
+            </div>
             <div>
                 <input
-                    id={props.id}
+                    ref={it}
                     type={props.type}
                     name={props.name}
                     value={text}
@@ -74,11 +77,14 @@ const Inputtool = (props) => {
                 />
             </div>
 
-            {/* <div>
-                <p>NEXT : {nextText}</p>
-            </div> */}
             <div>
-                <p>{typingSpeed}</p>
+                <p>2 : {baseText[bTN + 1]}</p>
+            </div>
+            <div>
+                <p>3 : {baseText[bTN + 2]}</p>
+            </div>
+            <div>
+                <p>타자 속도 : {typingSpeed}</p>
             </div>
             <div>{/* <p>{start}</p> */}</div>
         </>
