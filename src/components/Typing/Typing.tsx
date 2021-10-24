@@ -8,21 +8,16 @@ import typing from './../../pages/typing'
 
 const Typing = (props) => {
     const [idx1, setIdx1] = useState('2')
-    const [idx2, setIdx2] = useState('1')
 
-    const a = ExcuteApi.randomText(idx1, idx2)
-
+    const typingText = ExcuteApi.randomText(idx1)
+    // const a = typingText.text
+    // console.log(typeof a)
+    // const first = a.split('\n')
     const handleSubmit = (e) => {
         e.preventDefault()
         let randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        if (idx2 == `${randomNumber}`) {
-            randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        }
-
-        if (e.target.typing.value.length == a.presentText.length) {
+        if (e.target.typing.value.length == typingText.text.length) {
             console.log('ddd')
-            setIdx1(`${idx2}`)
-            setIdx2(`${randomNumber}`)
         }
 
         // if(e.target.typing.value==e.)
@@ -32,23 +27,21 @@ const Typing = (props) => {
         <>
             <form method='post' onSubmit={handleSubmit}>
                 <div>
-                    <p>{a.presentText}</p>
+                    <p>{typingText.text}</p>
                 </div>
                 <div>
+                    {typingText && typingText != undefined}
                     <Inputtool
                         name='typing'
                         type='text'
                         placeholder='위에 보이는 문장을 따라 타이핑해보세요.'
                         size='50'
                         autocomplete='off'
-                        presentText={idx1}
-                        nextText={idx2}
-                        text={a.presentText}
+                        autofocus='on'
+                        text={typingText.text}
                     />
                 </div>
-                <div>
-                    <p>NEXT : {a.nextText}</p>
-                </div>
+                <div>{/* <p>NEXT : {a.nextText}</p> */}</div>
                 <br />
                 <div>
                     <Link href='/insertTextPage'>

@@ -7,14 +7,12 @@ const ExcuteApi = {
             text: text,
         })
     },
-    randomText: (idx, nextIdx) => {
+    randomText: (idx) => {
         const { data, isValidating, error } = useSWR(
-            `http://127.0.0.1:3712/randomText?text=${idx}&nextText=${nextIdx}`
+            `http://127.0.0.1:3712/randomText?text=${idx}`
         )
-        const presentText = data?.text
-        const nextText = data?.nextText
-
-        return { presentText, nextText }
+        const text = data?.text
+        return { text }
     },
 }
 export default ExcuteApi
