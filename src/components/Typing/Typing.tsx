@@ -8,6 +8,7 @@ import typing from './../../pages/typing'
 import TextareaTool from '../textarea/TextareaTool'
 
 const Typing = (props) => {
+    const exCode = ExcuteApi.randomText(2)
     const [idx1, setIdx1] = useState(80)
     const [idx2, setIdx2] = useState(30)
 
@@ -40,7 +41,14 @@ const Typing = (props) => {
             <main>
                 <form method='post' onSubmit={handleSubmit}>
                     <div>
-                        <TextareaTool name='typing' cols={idx1} rows={idx2} />
+                        {exCode && exCode.text != undefined && (
+                            <TextareaTool
+                                name='typing'
+                                cols={idx1}
+                                rows={idx2}
+                                exCode={exCode.text}
+                            />
+                        )}
                     </div>
                     <br />
                     <div>

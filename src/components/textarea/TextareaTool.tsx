@@ -1,32 +1,39 @@
 import React, { useRef } from 'react'
 import { useState } from 'react'
 import ExcuteApi from '../../apis/ExcuteApi'
+import triggerEvent from 'trigger-event'
+
 const TextareaTool = (props) => {
-    const exCode = ExcuteApi.randomText(2)
-    const [text, setText] = useState(`${exCode?.text}`)
+    const [text, setText] = useState(props.exCode)
+    const [csPoint, setCsPoint] = useState(0)
     const cursor = useRef(null)
     const cs = cursor.current
-    React.useEffect(() => {
-        setText(`${exCode?.text}`)
-    }, [exCode?.text])
-    // console.log(text)
+
     const handleChange = (e) => {
         e.preventDefault()
         // let cursor = text + exCode.text
-        setText(e.target.value)
-        cs.defaultValue = 'ds'
-        console.log(cursor)
+        // setText(e.target.value)
+        if (
+            e.nativeEvent.inputType == 'insertText' ||
+            e.nativeEvent.inputType == 'insertCompositionText'
+        )
+            setCsPoint(csPoint + 1)
+
+        console.log(e.target.value)
         // if()
     }
     const handleClick = (e) => {
-        cs.draggable = false
-        cs.selectionStart = 0
-        cs.selectionEnd = 0
+        cs.selectionStart = csPoint
+        cs.selectionEnd = csPoint
     }
-    const handleMouseDown = (e) => {
-        console.log('asd')
-        // cs.readOnly = true
+    const handleKeyPress = (e) => {
+        // console.log(e)
+
+        if (e.keyCode === 8 && csPoint > 0) {
+            setCsPoint(csPoint - 1)
+        }
     }
+
     return (
         <>
             <div>
@@ -38,7 +45,8 @@ const TextareaTool = (props) => {
                     value={text}
                     onChange={handleChange}
                     onClick={handleClick}
-                    onMouseDown={handleMouseDown}
+                    onMouseDown={handleClick}
+                    onKeyDown={handleKeyPress}
                 ></textarea>
             </div>
         </>
