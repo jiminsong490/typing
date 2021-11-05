@@ -16,21 +16,34 @@ const Typing = (props) => {
     const [bTN, setbTn] = useState(0)
 
     const typingText = ExcuteApi.randomText(idx1)
-    const baseText = props.text.split('\n')
-
+    const baseTextOrg = props.text.split('\n')
+    const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
+    const oneText = baseText[bTN].split('')
+    let spaceCheak = true
     const it = useRef(null)
 
     useEffect(() => {
         it.current.focus()
     }, [])
 
-    const listItems = baseText.map((number, idx) => <li key={idx}>{number}</li>)
-    console.log(listItems)
+    const listItems = oneText
+        .filter((oneText) => {
+            if (oneText == ' ') {
+                if (spaceCheak == true) {
+                    return false
+                }
+                spaceCheak = true
+                return true
+            }
+            spaceCheak = false
+            return true
+        })
+        .map((number, idx) => <a key={idx}>{number}</a>)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // let randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        if (baseText[bTN].length == e.target.inputtext.value.length + 1) {
+        if (listItems.length == e.target.inputtext.value.length + 1) {
             setText('')
             setCount(0)
             setBack(1)
@@ -48,7 +61,7 @@ const Typing = (props) => {
         setCount(typingCount + 1)
         setSpeed((typingCount * 60) / seconds - 20 * backspace)
         // console.log(typingSpeed)
-        if (baseText[bTN].length == e.target.value.length) {
+        if (listItems.length == e.target.value.length) {
             setText('')
             setCount(0)
             setBack(1)
@@ -69,10 +82,7 @@ const Typing = (props) => {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div>
-                        {listItems}
-                        <p>1 : {baseText[bTN]}</p>
-                    </div>
+                    <div>{listItems}</div>
                     <div>
                         <input
                             ref={it}
@@ -84,15 +94,15 @@ const Typing = (props) => {
                             autoComplete='off'
                             onChange={handleChange}
                         />
-                        <p>타자 속도 : {typingSpeed}</p>
                     </div>
 
                     <div>
-                        <p>2 : {baseText[bTN + 1]}</p>
+                        <p>{baseText[bTN + 1]}</p>
                     </div>
                     <div>
-                        <p>3 : {baseText[bTN + 2]}</p>
+                        <p>{baseText[bTN + 2]}</p>
                     </div>
+                    <p>타자 속도 : {typingSpeed}</p>
                 </div>
                 <br />
                 <div>
