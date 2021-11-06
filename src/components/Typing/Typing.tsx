@@ -18,27 +18,33 @@ const Typing = (props) => {
     const typingText = ExcuteApi.randomText(idx1)
     const baseTextOrg = props.text.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
-    const oneText = baseText[bTN].split('')
     let spaceCheak = true
+    const oneText = baseText[bTN].split('').filter((baseText) => {
+        if (baseText == ' ') {
+            if (spaceCheak == true) {
+                return false
+            }
+            spaceCheak = true
+            return true
+        }
+        spaceCheak = false
+        return true
+    })
+
     const it = useRef(null)
 
     useEffect(() => {
         it.current.focus()
     }, [])
 
-    const listItems = oneText
-        .filter((oneText) => {
-            if (oneText == ' ') {
-                if (spaceCheak == true) {
-                    return false
-                }
-                spaceCheak = true
-                return true
-            }
-            spaceCheak = false
-            return true
-        })
-        .map((number, idx) => <a key={idx}>{number}</a>)
+    const typoCheak = () => {
+        let lastText = text.split('')
+        if(lastText[lastText.length-1]==oneText[])
+    }
+    console.log(oneText)
+
+    const listItems = oneText.map((number, idx) => <a key={idx}>{number}</a>)
+    // console.log(listItems)
 
     const handleSubmit = (e) => {
         e.preventDefault()
