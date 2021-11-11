@@ -1,4 +1,8 @@
 const GoalText = (props) => {
-    return <p>{props.text}</p>
+    return (
+        <a key={props.idx} style={props.color}>
+            {props.text}
+        </a>
+    )
 }
 export default GoalText

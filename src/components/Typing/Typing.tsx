@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import ExcuteApi from '../../apis/ExcuteApi'
 
 import Link from 'next/link'
+import GoalText from '../goalText/GoalText'
 
 const Typing = (props) => {
     const [idx1, setIdx1] = useState('2')
 
-    const [text, setText] = useState('')
+    const [text, setText] = useState([])
     const [typingCount, setCount] = useState(0)
     const [typingSpeed, setSpeed] = useState(0)
     const [backspace, setBack] = useState(1)
@@ -14,11 +15,16 @@ const Typing = (props) => {
     const [end, setEnd] = useState(new Date())
     const [seconds, setSeconds] = useState(0)
     const [bTN, setbTn] = useState(0)
+    const [csPoint, setCsPoint] = useState(0)
+    const [wrongText, setWrongText] = useState([])
 
     const typingText = ExcuteApi.randomText(idx1)
     const baseTextOrg = props.text.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true
+    let color = {
+        color: 'black',
+    }
     const oneText = baseText[bTN].split('').filter((baseText) => {
         if (baseText == ' ') {
             if (spaceCheak == true) {
@@ -30,30 +36,43 @@ const Typing = (props) => {
         spaceCheak = false
         return true
     })
+    // .map((bT, idx) => {
+    //     return (
+    //         <a key={idx} style={color}>
+    //             {bT}
+    //         </a>
+    //     )
+    // })
 
     const it = useRef(null)
-
     useEffect(() => {
         it.current.focus()
     }, [])
+    // const typoCheak = () => {
+    //     let lastText = text.split('')
+    //     if (lastText[csPoint - 1] != oneText[csPoint - 1]) {
+    //         color.color = 'red'
+    //         return true
+    //     }
+    //     console.log(lastText[csPoint - 1], oneText[csPoint - 1])
+    //     return false
+    // }
+    // console.log(typoCheak())
+    // if (typoCheak()) {
+    // }
 
-    const typoCheak = () => {
-        let lastText = text.split('')
-        if(lastText[lastText.length-1]==oneText[])
-    }
-    console.log(oneText)
-
-    const listItems = oneText.map((number, idx) => <a key={idx}>{number}</a>)
     // console.log(listItems)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // let randomNumber = Math.floor(Math.random() * (16 - 1)) + 1
-        if (listItems.length == e.target.inputtext.value.length + 1) {
-            setText('')
+        if (oneText.length == e.target.inputtext.value.length + 1) {
+            setText([])
             setCount(0)
             setBack(1)
             setbTn(bTN + 1)
+            setCsPoint(0)
+            setWrongText([])
         }
     }
 
@@ -61,28 +80,89 @@ const Typing = (props) => {
         e.preventDefault()
         setEnd(new Date())
         setSeconds(end.getSeconds() - start.getSeconds())
-
         // console.log(seconds)
         setText(e.target.value)
+
+        console.log(
+            oneText[text.length - 1],
+            text[text.length - 1],
+            text.length - 1
+        )
+        // undefined != text[text.length - 1] &&
+        oneText[text.length - 1] == text[text.length - 1]
+            ? setWrongText((wrongText) => [...wrongText, true])
+            : setWrongText((wrongText) => [...wrongText, false])
+
         setCount(typingCount + 1)
         setSpeed((typingCount * 60) / seconds - 20 * backspace)
-        // console.log(typingSpeed)
-        if (listItems.length == e.target.value.length) {
-            setText('')
-            setCount(0)
-            setBack(1)
-            setbTn(bTN + 1)
-        } else if (text == '') {
+        // console.log(listItems.length, e.target.value.length)
+        if (
+            e.nativeEvent.inputType == 'insertText' ||
+            e.nativeEvent.inputType == 'insertCompositionText'
+        ) {
+            setCsPoint(csPoint + 1)
+            if (oneText.length == e.target.value.length) {
+                setText([])
+                setCount(0)
+                setBack(1)
+                setbTn(bTN + 1)
+                setCsPoint(0)
+                setWrongText([
+                    {
+                        color: 'black',
+                    },
+                ])
+            }
+
+            // console.log(oneText.length, e.target.value.length)
+        }
+        if (text.length == 0) {
             setStart(new Date())
         }
-        // setpText(a?.presentText)
-        // setnText(a?.nextText)
-        // if (presentText?.length + 1 == e.target.value.length) {
-        //     setText('')
-        //     setpText(a.nextText)
-        //     setnText(a.nextText)
-        // }
+        // else if(e.target.value==)
+        // console.log(e.target.value)
     }
+
+    const handleKeyDown = (e) => {
+        // console.log(e.keyCode)
+
+        if (e.keyCode === 8 && csPoint > 0) {
+            setCsPoint(csPoint - 1)
+            // setWrongText((wrongText.filter(wT => )))
+        }
+    }
+
+    const listItems = oneText
+        // .filter((asd, idx) => {
+        //     if ((wrongText[idx] = false)) {
+        //         color.color = 'red'
+        //     }
+        // })
+        .map((number, idx) => {
+            console.log(wrongText[idx], color.color)
+            if (wrongText[idx] == true) {
+                color.color = 'black'
+                console.log(wrongText[idx], color.color)
+                return (
+                    <a key={idx} style={color}>
+                        {number}
+                    </a>
+                )
+            } else if (wrongText[idx] == false) {
+                color.color = 'red'
+                return (
+                    <a key={idx} style={color}>
+                        {number}
+                    </a>
+                )
+            }
+            return (
+                <a key={idx} style={color}>
+                    {number}
+                </a>
+            )
+        })
+    console.log(listItems)
 
     return (
         <>
@@ -99,6 +179,7 @@ const Typing = (props) => {
                             placeholder='위에 보이는 문장을 따라 타이핑해보세요.'
                             autoComplete='off'
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
 
