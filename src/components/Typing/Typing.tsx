@@ -4,6 +4,8 @@ import ExcuteApi from '../../apis/ExcuteApi'
 import Link from 'next/link'
 import GoalText from '../goalText/GoalText'
 import CheakWrong from './../../Funtion/CheakWrong'
+import Clock from './../clock/Clock'
+import TypingSpeed from '../clock/TypingSpeed'
 
 const Typing = (props) => {
     const [idx1, setIdx1] = useState('2')
@@ -60,7 +62,6 @@ const Typing = (props) => {
         e.preventDefault()
         setEnd(new Date())
         setSeconds(end.getSeconds() - start.getSeconds())
-        console.log(e)
         setText(e.target.value)
         setWrongText([])
 
@@ -152,7 +153,9 @@ const Typing = (props) => {
                     <div>
                         <p>{baseText[bTN + 2]}</p>
                     </div>
+                    <TypingSpeed count={typingCount} backspace={backspace} />
                     <p>타자 속도 : {Math.round(typingSpeed)}</p>
+                    <Clock />
                 </div>
                 <br />
                 <div>
