@@ -3,6 +3,7 @@ import ExcuteApi from '../../apis/ExcuteApi'
 
 import Link from 'next/link'
 import GoalText from '../goalText/GoalText'
+import CheakWrong from './../../Funtion/CheakWrong'
 
 const Typing = (props) => {
     const [idx1, setIdx1] = useState('2')
@@ -36,32 +37,11 @@ const Typing = (props) => {
         spaceCheak = false
         return true
     })
-    // .map((bT, idx) => {
-    //     return (
-    //         <a key={idx} style={color}>
-    //             {bT}
-    //         </a>
-    //     )
-    // })
 
     const it = useRef(null)
     useEffect(() => {
         it.current.focus()
     }, [])
-    // const typoCheak = () => {
-    //     let lastText = text.split('')
-    //     if (lastText[csPoint - 1] != oneText[csPoint - 1]) {
-    //         color.color = 'red'
-    //         return true
-    //     }
-    //     console.log(lastText[csPoint - 1], oneText[csPoint - 1])
-    //     return false
-    // }
-    // console.log(typoCheak())
-    // if (typoCheak()) {
-    // }
-
-    // console.log(listItems)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -80,18 +60,22 @@ const Typing = (props) => {
         e.preventDefault()
         setEnd(new Date())
         setSeconds(end.getSeconds() - start.getSeconds())
-        // console.log(seconds)
+        console.log(e)
         setText(e.target.value)
+        setWrongText([])
 
-        console.log(
-            oneText[text.length - 1],
-            text[text.length - 1],
-            text.length - 1
-        )
-        // undefined != text[text.length - 1] &&
+        undefined != text[text.length - 1] &&
         oneText[text.length - 1] == text[text.length - 1]
             ? setWrongText((wrongText) => [...wrongText, true])
             : setWrongText((wrongText) => [...wrongText, false])
+
+        // oneText.filter((asd, idx, oT) => {
+        //     oT[idx] == text[idx]
+        //         ? setWrongText((wrongText) => [...wrongText, true])
+        //         : setWrongText((wrongText) => [...wrongText, false])
+        // })
+
+        // setWrongText(CheakWrong(oneText, text))
 
         setCount(typingCount + 1)
         setSpeed((typingCount * 60) / seconds - 20 * backspace)
@@ -107,11 +91,7 @@ const Typing = (props) => {
                 setBack(1)
                 setbTn(bTN + 1)
                 setCsPoint(0)
-                setWrongText([
-                    {
-                        color: 'black',
-                    },
-                ])
+                setWrongText([])
             }
 
             // console.log(oneText.length, e.target.value.length)
@@ -119,8 +99,6 @@ const Typing = (props) => {
         if (text.length == 0) {
             setStart(new Date())
         }
-        // else if(e.target.value==)
-        // console.log(e.target.value)
     }
 
     const handleKeyDown = (e) => {
@@ -128,41 +106,26 @@ const Typing = (props) => {
 
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
-            // setWrongText((wrongText.filter(wT => )))
+            setBack(backspace + 1)
         }
     }
 
-    const listItems = oneText
-        // .filter((asd, idx) => {
-        //     if ((wrongText[idx] = false)) {
-        //         color.color = 'red'
-        //     }
-        // })
-        .map((number, idx) => {
-            console.log(wrongText[idx], color.color)
-            if (wrongText[idx] == true) {
-                color.color = 'black'
-                console.log(wrongText[idx], color.color)
-                return (
-                    <a key={idx} style={color}>
-                        {number}
-                    </a>
-                )
-            } else if (wrongText[idx] == false) {
-                color.color = 'red'
-                return (
-                    <a key={idx} style={color}>
-                        {number}
-                    </a>
-                )
-            }
-            return (
-                <a key={idx} style={color}>
-                    {number}
-                </a>
-            )
-        })
-    console.log(listItems)
+    // console.log(wrongText)
+    const listItems = oneText.map((number, idx) => {
+        // console.log(wrongText[idx], color.color)
+        if (wrongText[idx] == true) {
+            color.color = 'black'
+        } else if (wrongText[idx] == false) {
+            color.color = 'red'
+        }
+        // console.log(color)
+        return (
+            <a key={idx} style={color}>
+                {number}
+            </a>
+        )
+    })
+    // console.log(listItems)
 
     return (
         <>
@@ -172,7 +135,7 @@ const Typing = (props) => {
                     <div>
                         <input
                             ref={it}
-                            type='text6'
+                            type='text'
                             name='inputtext'
                             value={text}
                             size={50}
@@ -189,7 +152,7 @@ const Typing = (props) => {
                     <div>
                         <p>{baseText[bTN + 2]}</p>
                     </div>
-                    <p>타자 속도 : {typingSpeed}</p>
+                    <p>타자 속도 : {Math.round(typingSpeed)}</p>
                 </div>
                 <br />
                 <div>
