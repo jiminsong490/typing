@@ -9,7 +9,7 @@ const typing = (props) => {
     return (
         <>
             {typingText && typingText != undefined && (
-                <Typing token={props.token} text={typingText} />
+                <Typing token={props.token} pText={typingText} />
             )}
         </>
     )
