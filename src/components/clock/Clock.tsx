@@ -1,20 +1,9 @@
 import { useEffect, useState } from 'react'
+import useTime from './../../hooks/useTime'
 
 const Clock = (props) => {
-    const [time, setTime] = useState('')
-    useEffect(() => {
-        const intervalId = setInterval(() => clock(), 100)
-        return () => clearInterval(intervalId)
-    }, [])
-    const clock = () => {
-        setTime(String(new Date()))
-        // console.log(time)
-        // console.log(time)
-    }
-    const handlechange = (e) => {
-        console.log(e)
-    }
+    const { timeString } = useTime()
 
-    return <p onChange={handlechange}>{time}</p>
+    return <p>{timeString}</p>
 }
 export default Clock

@@ -3,7 +3,7 @@ import ExcuteApi from '../../apis/ExcuteApi'
 
 import Link from 'next/link'
 import GoalText from '../goalText/GoalText'
-import CheakWrong from './../../Funtion/CheakWrong'
+import CheakWrong from '../../funtion/CheakWrong'
 import Clock from './../clock/Clock'
 import TypingSpeed from '../clock/TypingSpeed'
 
@@ -13,7 +13,7 @@ const Typing = (props) => {
     const [text, setText] = useState([])
     const [typingCount, setCount] = useState(0)
     const [typingSpeed, setSpeed] = useState(0)
-    const [backspace, setBack] = useState(1)
+    const [backspace, setBack] = useState(0)
     const [start, setStart] = useState(new Date())
     const [end, setEnd] = useState(new Date())
     const [seconds, setSeconds] = useState(0)
@@ -25,9 +25,7 @@ const Typing = (props) => {
     const baseTextOrg = props.text.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true
-    let color = {
-        color: 'black',
-    }
+
     const oneText = baseText[bTN].split('').filter((baseText) => {
         if (baseText == ' ') {
             if (spaceCheak == true) {
@@ -51,7 +49,7 @@ const Typing = (props) => {
         if (oneText.length == e.target.inputtext.value.length + 1) {
             setText([])
             setCount(0)
-            setBack(1)
+            setBack(0)
             setbTn(bTN + 1)
             setCsPoint(0)
             setWrongText([])
@@ -65,16 +63,11 @@ const Typing = (props) => {
         setText(e.target.value)
         setWrongText([])
 
-        undefined != text[text.length - 1] &&
-        oneText[text.length - 1] == text[text.length - 1]
-            ? setWrongText((wrongText) => [...wrongText, true])
-            : setWrongText((wrongText) => [...wrongText, false])
-
-        // oneText.filter((asd, idx, oT) => {
-        //     oT[idx] == text[idx]
-        //         ? setWrongText((wrongText) => [...wrongText, true])
-        //         : setWrongText((wrongText) => [...wrongText, false])
-        // })
+        oneText.filter((asd, idx, oT) => {
+            oT[idx] == e.target.value[idx]
+                ? setWrongText((wrongText) => [...wrongText, true])
+                : setWrongText((wrongText) => [...wrongText, false])
+        })
 
         // setWrongText(CheakWrong(oneText, text))
 
@@ -89,7 +82,7 @@ const Typing = (props) => {
             if (oneText.length == e.target.value.length) {
                 setText([])
                 setCount(0)
-                setBack(1)
+                setBack(0)
                 setbTn(bTN + 1)
                 setCsPoint(0)
                 setWrongText([])
@@ -97,7 +90,7 @@ const Typing = (props) => {
 
             // console.log(oneText.length, e.target.value.length)
         }
-        if (text.length == 0) {
+        if (e.target.value.length == 0) {
             setStart(new Date())
         }
     }
@@ -111,9 +104,10 @@ const Typing = (props) => {
         }
     }
 
-    // console.log(wrongText)
     const listItems = oneText.map((number, idx) => {
-        // console.log(wrongText[idx], color.color)
+        let color = {
+            color: 'black',
+        }
         if (wrongText[idx] == true) {
             color.color = 'black'
         } else if (wrongText[idx] == false) {
@@ -126,7 +120,7 @@ const Typing = (props) => {
             </a>
         )
     })
-    // console.log(listItems)
+    // console.log(typingSpeed, backspace)
 
     return (
         <>

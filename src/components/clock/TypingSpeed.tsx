@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react'
+import useTime from './../../hooks/useTime'
 
 const TypingSpeed = (props) => {
-    const [typingCount, setCount] = useState(0)
-    const [typingSpeed, setSpeed] = useState(0)
-    const [backspace, setBack] = useState(1)
+    const [speed, setSpeed] = useState(0)
     const [start, setStart] = useState(new Date())
     const [end, setEnd] = useState(new Date())
-    const dd = props.count
+    const [seconds, setSeconds] = useState(0)
+    const { time } = useTime()
+
     useEffect(() => {
-        const intervalId = setInterval(() => asd(), 100)
-        return () => clearInterval(intervalId)
-    }, [])
+        props.count != 0 ? setEnd(new Date()) : setStart(new Date())
 
-    const asd = () => {
-        setSpeed(typingSpeed)
-        // console.log(dd)
-    }
+        setSeconds(Math.abs((end.getTime() - start.getTime()) * 0.001))
+        setSpeed((props.count * 60) / seconds - 10 * props.backspace)
+        // console.log(
+        //     `speed : ${props.count} * ${60}) / ${seconds} = ${
+        //         (props.count * 60) / seconds
+        //     }`
+        // )
+    }, [time, props.count])
 
-    return <p>타자 속도 : {typingSpeed}</p>
+    return <p>타자 속도 : {String(Math.round(speed))}</p>
 }
 
 export default TypingSpeed
