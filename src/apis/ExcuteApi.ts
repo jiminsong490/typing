@@ -15,9 +15,11 @@ const ExcuteApi = {
         return text
     },
     insertFile: async (file) => {
-        const response = await XHR('post', 'http://127.0.0.1:3712/fileUpload', {
-            file: file,
-        })
+        const response = await XHR(
+            'post',
+            'http://127.0.0.1:3712/fileUpload',
+            file
+        )
     },
 }
 export default ExcuteApi

@@ -38,7 +38,11 @@ const Typing = ({ token, pText }) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={handleSubmit}
+                method='post'
+                encType='multipart/form-data'
+            >
                 <div>
                     <div>{listItems}</div>
                     <div>
