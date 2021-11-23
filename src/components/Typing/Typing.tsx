@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ExcuteApi from '../../apis/ExcuteApi'
-
-import Link from 'next/link'
 import Clock from './../clock/Clock'
 import TypingSpeed from '../clock/TypingSpeed'
 import useTyping from './useTyping'
+import FileUpload from './../file/FileUpload'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -63,7 +61,6 @@ const Typing = ({ token, pText }) => {
                             onKeyDown={handleKeyDown}
                         />
                     </div>
-
                     <div>
                         <p>{baseText[bTN + 1]}</p>
                     </div>
@@ -74,11 +71,7 @@ const Typing = ({ token, pText }) => {
                     <Clock />
                 </div>
                 <div>
-                    <Link href='/insertTextPage'>
-                        <a>
-                            <input type='button' value='텍스트 입력' />
-                        </a>
-                    </Link>
+                    <FileUpload></FileUpload>
                 </div>
             </form>
         </>
