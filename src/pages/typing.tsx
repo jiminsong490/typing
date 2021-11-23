@@ -4,7 +4,7 @@ import cookies from 'next-cookies'
 import ExcuteApi from '../apis/ExcuteApi'
 
 const typing = (props) => {
-    const [idx1, setIdx1] = useState('2')
+    const [idx1, setIdx1] = useState('20')
     const typingText = ExcuteApi.randomText(idx1)
     return (
         <>
