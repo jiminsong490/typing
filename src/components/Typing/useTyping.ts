@@ -26,6 +26,8 @@ const useTyping = ({ pText }) => {
         spaceCheak = false
         return true
     })
+    // .filter((baseText) => baseText != '\r')
+    // console.log(oneText, Array.isArray(oneText) && oneText.length === 0)
 
     const it = useRef(null)
     useEffect(() => {
