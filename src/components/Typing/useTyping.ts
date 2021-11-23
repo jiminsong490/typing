@@ -14,7 +14,6 @@ const useTyping = ({ pText }) => {
     const baseTextOrg = pText.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true
-
     const oneText = baseText[bTN].split('').filter((baseText) => {
         if (baseText == ' ') {
             if (spaceCheak == true) {
@@ -26,9 +25,13 @@ const useTyping = ({ pText }) => {
         spaceCheak = false
         return true
     })
+<<<<<<< HEAD
     // .filter((baseText) => baseText != '\r')
     // console.log(oneText, Array.isArray(oneText) && oneText.length === 0)
-
+    // const oneText = asd.filter((baseText) => baseText != '\r')
+    // console.log(asd)
+    // console.log(oneText)
+>>>>>>> 7582490a7a36a7f09479b859b91bfdd414d46a72
     const it = useRef(null)
     useEffect(() => {
         it.current.focus()

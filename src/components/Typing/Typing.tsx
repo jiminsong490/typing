@@ -19,7 +19,7 @@ const Typing = ({ token, pText }) => {
         backspace,
     } = useTyping({ pText })
 
-    const listItems = oneText.map((number, idx) => {
+    const listItems = oneText.map((text, idx) => {
         let color = {
             color: 'black',
         }
@@ -30,7 +30,7 @@ const Typing = ({ token, pText }) => {
         }
         return (
             <a key={idx} style={color}>
-                {number}
+                {text}
             </a>
         )
     })
