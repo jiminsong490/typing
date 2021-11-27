@@ -22,7 +22,8 @@ const ExcuteApi = {
         )
     },
     signup: async (email, password, tel, username) => {
-        const response = await XHR('post', 'http://127.0.0.1:3714/signup', {
+        console.log(email, password, tel, username)
+        const response = await XHR('post', 'http://127.0.0.1:37l2/signup', {
             email: email,
             password: password,
             tel: tel,
@@ -30,14 +31,14 @@ const ExcuteApi = {
         })
         if (response.data.success) {
             alert('회원가입이 성공적으로 완료되었습니다')
-            location.href = 'http://localhost:3000/test'
         } else {
             alert('회원가입이 실패하였습니다. 다시 입력해주세요')
             location.reload()
         }
+        console.log(response.data.success)
     },
     delete: async (email, password) => {
-        const response = await XHR('delete', 'http://127.0.0.1:3714/delete', {
+        const response = await XHR('delete', 'http://127.0.0.1:3712/delete', {
             email: email,
             password: password,
         })
@@ -53,7 +54,7 @@ const ExcuteApi = {
         }
     },
     change: async (email, password, change) => {
-        const response = await XHR('put', 'http://127.0.0.1:3714/put', {
+        const response = await XHR('put', 'http://127.0.0.1:3712/put', {
             email: email,
             password: password,
             changePassword: change,
@@ -69,13 +70,13 @@ const ExcuteApi = {
     find: async (tel, username) => {
         const response = await XHR(
             'get',
-            `http://127.0.0.1:3714/findall?tel=${tel}&username=${username}`
+            `http://127.0.0.1:3712/findall?tel=${tel}&username=${username}`
         )
         if (response.data.result) alert(`아이디 : ${response.data.email}`)
         else alert('계정을 찾을 수 없습니다. 다시 입력해주세요.')
     },
     login: async (email, password) => {
-        const response = await XHR('post', 'http://127.0.0.1:3714/login', {
+        const response = await XHR('post', 'http://127.0.0.1:3712/login', {
             email: email,
             password: password,
         })

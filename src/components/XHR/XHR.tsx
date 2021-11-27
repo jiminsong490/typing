@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const XHR = async (method, url, params = {}, headers = {}) => {
+    console.log(method, url, params, headers)
     // ----------------- ENTER YOUR CODE HERE -----------------
     // API를 호출하는 General 코드를 작성하라
     // --------------------------------------------------------
@@ -11,6 +12,8 @@ const XHR = async (method, url, params = {}, headers = {}) => {
         params: params,
         headers: headers,
     })
+    console.log(result)
+
     return result
 }
 

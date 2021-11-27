@@ -19,18 +19,18 @@ const Typing = ({ token, pText }) => {
         backspace,
     } = useTyping({ pText })
 
-    const listItems = oneText.map((text, idx) => {
+    const listItems = oneText.map((oneText, idx) => {
         let color = {
             color: 'black',
         }
         if (wrongText[idx] == true) {
-            color.color = 'black'
+            color.color = 'green'
         } else if (wrongText[idx] == false && text.length - 1 >= idx) {
             color.color = 'red'
         }
         return (
             <a key={idx} style={color}>
-                {text}
+                {oneText}
             </a>
         )
     })

@@ -1,26 +1,22 @@
 import useSWR from 'swr'
 import { fetcher } from '../../pages/_app'
-import IdAndPw from './idAndPw'
+import IdAndPw from './IdAndPw'
 import OtherFuntion from './OtherFuntion'
 
 const Login = ({ token }) => {
     const { data, isValidating, error } = useSWR(
-        ['http://localhost:3714/cheaktoken', token],
+        ['http://localhost:3712/checktoken', token],
         (url, token) => fetcher(url, { token })
     )
     const a = data
-    const handleSubmit = () => {}
+    const handleSubmit = (e) => {}
     return (
         <>
-            <div>
-                <IdAndPw />
-            </div>
-            <div>
-                <OtherFuntion />
-            </div>
-            <div>
-                <p>{a}</p>
-            </div>
+            <IdAndPw />
+
+            <OtherFuntion />
+
+            <p>{a}</p>
         </>
     )
 }

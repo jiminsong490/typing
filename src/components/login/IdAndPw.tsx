@@ -7,10 +7,11 @@ const IdAndPw = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // console.log(e.target.email)
         const email = e.target.email.value
         const password = e.target.password.value
         ExcuteApi.login(email, password)
-        console.log(email, password)
+        // console.log(email, password)
     }
     const handleClick = () => {
         document.cookie =
@@ -20,24 +21,24 @@ const IdAndPw = () => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        아이디 :{' '}
-                        <input
-                            type='text'
-                            placeholder='아이디를 입력해주세요.'
-                        />
-                    </label>
-                    <label>
-                        비밀번호 :{' '}
-                        <input
-                            type='password'
-                            placeholder='비밀번호를 입력해주세요.'
-                        />
-                    </label>
-                    <input type='submit' value='login' />
-                    <input type='button' value='logout' onClick={handleClick} />
-                </div>
+                <label>
+                    아이디 :{' '}
+                    <input
+                        name='email'
+                        type='email'
+                        placeholder='아이디를 입력해주세요.'
+                    />
+                </label>
+                <label>
+                    비밀번호 :{' '}
+                    <input
+                        name='password'
+                        type='password'
+                        placeholder='비밀번호를 입력해주세요.'
+                    />
+                </label>
+                <input type='submit' value='login' />
+                <input type='button' value='logout' onClick={handleClick} />
             </form>
         </>
     )
