@@ -1,4 +1,6 @@
+import ChangePW from '../../components/loginFuntion/ChangePW'
+
 const changePW = () => {
-    return <></>
+    return <ChangePW />
 }
 export default changePW

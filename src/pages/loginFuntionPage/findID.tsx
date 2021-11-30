@@ -1,4 +1,6 @@
+import FindID from '../../components/loginFuntion/FindID'
+
 const findID = () => {
-    return <></>
+    return <FindID />
 }
 export default findID

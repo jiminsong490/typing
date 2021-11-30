@@ -9,9 +9,22 @@ const OtherFuntion = () => {
                     <input type='button' value='SIGN UP' />
                 </a>
             </Link>
-            <input type='button' value='FIND ID' />
-            <input type='button' value='CHANGE PASSWORD' />
-            <input type='button' value='DELETE ID' />
+            <Link href='/loginFuntionPage/findID'>
+                <a>
+                    <input type='button' value='FIND ID' />
+                </a>
+            </Link>
+
+            <Link href='/loginFuntionPage/changePW'>
+                <a>
+                    <input type='button' value='CHANGE PASSWORD' />
+                </a>
+            </Link>
+            <Link href='/loginFuntionPage/deleteID'>
+                <a>
+                    <input type='button' value='DELETE ID' />
+                </a>
+            </Link>
         </>
     )
 }

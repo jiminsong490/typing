@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router'
 import useSWR from 'swr'
 import XHR from '../components/XHR/XHR'
 
@@ -44,7 +45,7 @@ const ExcuteApi = {
         })
         if (response.data.success == true) {
             alert('계정이 성공적으로 탈퇴되었습니다.')
-            location.href = 'http://localhost:3000/test'
+            location.href = 'http://localhost:3000/login'
         } else {
             const errorMsg = response.data.errorMsg
             alert(
@@ -61,7 +62,7 @@ const ExcuteApi = {
         })
         if (response.data.success == true) {
             alert('비밀번호가 성공적으로 변경되었습니다.')
-            location.href = 'http://localhost:3000/test'
+            location.href = 'http://localhost:3000/login'
         } else {
             const errorMsg = response.data.errorMsg
             alert(`${errorMsg}`)
