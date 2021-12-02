@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import useSWR from 'swr'
 import ExcuteApi from '../../apis/ExcuteApi'
+import { fetcher } from '../../pages/_app'
 
-const useTyping = ({ pText }) => {
+const useTyping = ({ pText, token }) => {
     const [idx1, setIdx1] = useState('2')
     const [text, setText] = useState([])
     const [typingCount, setCount] = useState(0)
@@ -25,6 +27,12 @@ const useTyping = ({ pText }) => {
         spaceCheak = false
         return true
     })
+
+    const { data, isValidating, error } = useSWR(
+        ['http://localhost:3712/checktoken', token],
+        (url, token) => fetcher(url, { token })
+    )
+
     const it = useRef(null)
     useEffect(() => {
         it.current.focus()
@@ -84,6 +92,13 @@ const useTyping = ({ pText }) => {
             setBack(backspace + 1)
         }
     }
+
+    const handleClick = (e) => {
+        document.cookie =
+            document.cookie + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
+        location.reload()
+    }
+
     return {
         oneText,
         wrongText,
@@ -96,6 +111,8 @@ const useTyping = ({ pText }) => {
         bTN,
         typingCount,
         backspace,
+        data,
+        handleClick,
     }
 }
 export default useTyping

@@ -9,7 +9,6 @@ const Login = ({ token }) => {
         (url, token) => fetcher(url, { token })
     )
     const a = data
-    const handleSubmit = (e) => {}
     return (
         <>
             <IdAndPw />

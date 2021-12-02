@@ -5,7 +5,7 @@ const index = () => {
     const router = useRouter()
 
     useEffect(() => {
-        router.push('/login')
+        router.push('/typing')
     })
     return (
         <>

@@ -3,6 +3,7 @@ import Clock from './../clock/Clock'
 import TypingSpeed from '../clock/TypingSpeed'
 import useTyping from './useTyping'
 import FileUpload from './../file/FileUpload'
+import Link from 'next/link'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -17,7 +18,9 @@ const Typing = ({ token, pText }) => {
         bTN,
         typingCount,
         backspace,
-    } = useTyping({ pText })
+        data,
+        handleClick,
+    } = useTyping({ pText, token })
 
     const listItems = oneText.map((oneText, idx) => {
         let color = {
@@ -77,6 +80,18 @@ const Typing = ({ token, pText }) => {
                 <div>
                     <FileUpload></FileUpload>
                 </div>
+                <a>{data}</a>
+                <Link href='/login'>
+                    <a>
+                        <input type='button' name='login' value='login' />
+                    </a>
+                </Link>
+                <input
+                    type='button'
+                    name='logout'
+                    value='logout'
+                    onClick={handleClick}
+                />
             </form>
         </>
     )
