@@ -86,7 +86,7 @@ const ExcuteApi = {
             document.cookie = `token=${token}`
             location.reload()
         } else {
-            alert('계정을 찾을 수 없습니다. 다시 입력해주세요.')
+            alert(' 계정을 찾을 수 없습니다. 다시 입력해주세요.')
             location.reload()
         }
     },
