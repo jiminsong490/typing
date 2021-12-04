@@ -24,7 +24,7 @@ const ExcuteApi = {
     },
     signup: async (email, password, tel, username) => {
         console.log(email, password, tel, username)
-        const response = await XHR('post', 'http://127.0.0.1:37l2/signup', {
+        const response = await XHR('post', 'http://127.0.0.1:3712/signup', {
             email: email,
             password: password,
             tel: tel,
