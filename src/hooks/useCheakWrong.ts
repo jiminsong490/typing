@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CheakWrong = (oneText, text) => {
+const useCheakWrong = (oneText, text) => {
     const [wrongText, setWrongText] = useState([])
     oneText.filter((asd, idx, oT) => {
         // setWrongText([])
@@ -10,4 +10,4 @@ const CheakWrong = (oneText, text) => {
     })
     return wrongText
 }
-export default CheakWrong
+export default useCheakWrong

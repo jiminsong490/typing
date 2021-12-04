@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useTime from './../../hooks/useTime'
+import SpeedLog from './SpeedLog'
 
 const TypingSpeed = (props) => {
     const [speed, setSpeed] = useState(0)
@@ -20,7 +21,12 @@ const TypingSpeed = (props) => {
         // )
     }, [time, props.count])
 
-    return <p>타자 속도 : {String(Math.round(speed))}</p>
+    return (
+        <>
+            <p>타자 속도 : {String(Math.round(speed))}</p>
+            <SpeedLog speed={String(Math.round(speed))} />
+        </>
+    )
 }
 
 export default TypingSpeed

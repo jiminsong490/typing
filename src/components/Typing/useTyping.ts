@@ -28,10 +28,7 @@ const useTyping = ({ pText, token }) => {
         return true
     })
 
-    const { data, isValidating, error } = useSWR(
-        ['http://localhost:3712/checktoken', token],
-        (url, token) => fetcher(url, { token })
-    )
+    const data = ExcuteApi.getToken(token)
 
     const it = useRef(null)
     useEffect(() => {

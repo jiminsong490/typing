@@ -4,6 +4,7 @@ import TypingSpeed from '../clock/TypingSpeed'
 import useTyping from './useTyping'
 import FileUpload from './../file/FileUpload'
 import Link from 'next/link'
+import SpeedLog from '../clock/SpeedLog'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -75,12 +76,13 @@ const Typing = ({ token, pText }) => {
                         <p>{baseText[bTN + 2]}</p>
                     </div>
                     <TypingSpeed count={typingCount} backspace={backspace} />
+                    <SpeedLog />
                     <Clock />
                 </div>
                 <div>
                     <FileUpload></FileUpload>
                 </div>
-                <a>{data}</a>
+                <a>{data.name}</a>
                 <Link href='/login'>
                     <a>
                         <input type='button' name='login' value='login' />
