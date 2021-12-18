@@ -3,6 +3,12 @@ import { AppProps } from 'next/app'
 import React from 'react'
 import { SWRConfig } from 'swr'
 
+declare global {
+    interface Window {
+        Kakao: any
+    }
+}
+
 export const fetcher = (url, headers) =>
     axios.get(url, { headers }).then((res) => res.data)
 const MyApp = ({ Component, pageProps }: AppProps) => {

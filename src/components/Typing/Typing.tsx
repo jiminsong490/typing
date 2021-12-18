@@ -5,7 +5,7 @@ import useTyping from './useTyping'
 import FileUpload from './../file/FileUpload'
 import Link from 'next/link'
 import SpeedLog from '../clock/SpeedLog'
-import Share from '../kakao/share'
+import Share from '../kakao/Share'
 
 const Typing = ({ token, pText }) => {
     const {

@@ -10,11 +10,10 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <script src='https://developers.kakao.com/sdk/js/kakao.js'></script>
-                    <script>
-                        Kakao.init('869ceaaec4649ed9a6da41413eac0695')
-                        console.log(Kakao.isInitialized())
-                    </script>
+                    <script
+                        defer
+                        src='https://developers.kakao.com/sdk/js/kakao.js'
+                    ></script>
                 </Head>
 
                 <body>
