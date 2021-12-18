@@ -12,6 +12,7 @@ declare global {
 export const fetcher = (url, headers) =>
     axios.get(url, { headers }).then((res) => res.data)
 const MyApp = ({ Component, pageProps }: AppProps) => {
+    console.log(process.env)
     return (
         <SWRConfig
             value={{
