@@ -5,6 +5,7 @@ import useTyping from './useTyping'
 import FileUpload from './../file/FileUpload'
 import Link from 'next/link'
 import SpeedLog from '../clock/SpeedLog'
+import Share from '../kakao/share'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -94,6 +95,7 @@ const Typing = ({ token, pText }) => {
                     value='logout'
                     onClick={handleClick}
                 />
+                <Share />
             </form>
         </>
     )
