@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "next build",
-        "dev": "next dev ",
-        "start": "next start -p 8080",
+        "build": "cross-env APP_ENV=production next build",
+        "dev": "cross-env APP_ENV=local next dev",
+        "start": "cross-env APP_ENV=production next start -p 8080",
         "export": "next export"
     },
     "author": "",
@@ -31,6 +31,7 @@
         "babel-loader": "^8.2.2",
         "babel-plugin-styled-components": "^1.13.2",
         "babel-preset-react-app": "^10.0.0",
+        "cross-env": "^7.0.3",
         "eslint": "^7.32.0",
         "eslint-plugin-import": "^2.24.2",
         "eslint-plugin-jsx-a11y": "^6.4.1",

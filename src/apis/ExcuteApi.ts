@@ -3,7 +3,10 @@ import useSWR from 'swr'
 import { fetcher } from '../pages/_app'
 import XHR from './XHR'
 
-const apiAddress = 'typing.jiminproject.com'
+const apiAddress =
+    process.env.APP_ENV === 'production'
+        ? 'typing.jiminproject.com'
+        : 'localhost'
 
 const ExcuteApi = {
     insertText: async (text) => {
