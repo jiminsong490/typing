@@ -6,6 +6,8 @@ import FileUpload from './../file/FileUpload'
 import Link from 'next/link'
 import SpeedLog from '../clock/SpeedLog'
 import Share from '../kakao/Share'
+import Language from '../language/Language'
+import Mode from '../mode/Mode'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -83,7 +85,6 @@ const Typing = ({ token, pText }) => {
                 <div>
                     <FileUpload></FileUpload>
                 </div>
-                <a>{data.name}</a>
                 <Link href='/login'>
                     <a>
                         <input type='button' name='login' value='login' />
@@ -96,6 +97,9 @@ const Typing = ({ token, pText }) => {
                     onClick={handleClick}
                 />
                 <Share />
+                <p>{data.name}</p>
+                <Language />
+                <Mode />
             </form>
         </>
     )
