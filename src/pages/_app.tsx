@@ -2,6 +2,7 @@ import axios from 'axios'
 import { AppProps } from 'next/app'
 import React from 'react'
 import { SWRConfig } from 'swr'
+import { wrapper } from '../redux/store'
 
 declare global {
     interface Window {
@@ -24,4 +25,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

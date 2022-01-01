@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import ExcuteApi from '../../apis/ExcuteApi'
 import { fetcher } from '../../pages/_app'
+import { useSelector } from '../../redux/hooks'
 
 const useTyping = ({ pText, token }) => {
     const [idx1, setIdx1] = useState('2')
@@ -34,6 +35,8 @@ const useTyping = ({ pText, token }) => {
     useEffect(() => {
         it.current.focus()
     }, [])
+
+    const hardMode = useSelector((store) => store.hardMode)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -83,10 +86,15 @@ const useTyping = ({ pText, token }) => {
 
     const handleKeyDown = (e) => {
         // console.log(e.keyCode)
-
+        console.log(e.keyCode)
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
             setBack(backspace + 1)
+        }
+        if (e.keyCode === 8 && hardMode) {
+            console.log('dds')
+            console.log(e.target)
+            return false
         }
     }
 

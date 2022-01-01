@@ -24,7 +24,7 @@ const TypingSpeed = (props) => {
     return (
         <>
             <p>타자 속도 : {String(Math.round(speed))}</p>
-            <SpeedLog speed={String(Math.round(speed))} />
+            {/* <SpeedLog speed={String(Math.round(speed))} /> */}
         </>
     )
 }
