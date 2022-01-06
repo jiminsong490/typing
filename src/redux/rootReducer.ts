@@ -7,7 +7,7 @@ interface IState {
 }
 
 const initialState: IState = {
-    language: 'C',
+    language: 'JAVA',
     hardMode: false,
     accuracy: 100,
 }
