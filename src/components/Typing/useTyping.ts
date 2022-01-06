@@ -14,7 +14,7 @@ const useTyping = ({ pText, token }) => {
     const [wrongText, setWrongText] = useState([])
     const [keyCD, setKeyCD] = useState(Number)
 
-    // const typingText = ExcuteApi.randomText(idx1)
+    const typingText = ExcuteApi.randomText(idx1)
     const baseTextOrg = pText.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true
@@ -81,12 +81,14 @@ const useTyping = ({ pText, token }) => {
                 setCsPoint(0)
                 setWrongText([])
             }
+
             // console.log(oneText.length, e.target.value.length)
         }
     }
 
     const handleKeyDown = (e) => {
-        e.preventDefault()
+        // console.log(e.keyCode)
+        console.log(e.keyCode)
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
             setBack(backspace + 1)
