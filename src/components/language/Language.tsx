@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from '../../redux/hooks'
+import { useDispatch, useSelector } from '../../redux/hooks'
 import { updateLanguage } from '../../redux/rootReducer'
 
-const Language = () => {
-    const [language, setLanguage] = useState('C')
+const Language = (props) => {
+    const language = useSelector((store) => store.language)
+    const [Selected, setSelect] = useState(props.language)
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(updateLanguage(language))
-    }, [language])
-
+    // useEffect(() => {
+    //     setSelect(language)
+    // }, [language])
     const handleChange = (e) => {
-        setLanguage(e.target.value)
+        dispatch(updateLanguage(e.target.value))
+        setSelect(props.language)
     }
     return (
         <>
-            <select onChange={handleChange}>
+            <select onChange={handleChange} value={Selected}>
                 <option>C</option>
                 <option>PYTHON</option>
                 <option>JAVA</option>

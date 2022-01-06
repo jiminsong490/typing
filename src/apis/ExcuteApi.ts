@@ -24,7 +24,6 @@ const ExcuteApi = {
         const { data, isValidating, error } = useSWR(
             `${apiAddress}:3712/randomText?language=${encodeURI(language)}`
         )
-        console.log('EX')
         const text = data?.text
         return text
     },

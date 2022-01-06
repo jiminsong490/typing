@@ -5,7 +5,6 @@ import { fetcher } from '../../pages/_app'
 import { useSelector } from '../../redux/hooks'
 
 const useTyping = ({ pText, token }) => {
-    const [idx1, setIdx1] = useState('2')
     const [text, setText] = useState([])
     const [typingCount, setCount] = useState(0)
     const [backspace, setBack] = useState(0)
@@ -14,7 +13,6 @@ const useTyping = ({ pText, token }) => {
     const [wrongText, setWrongText] = useState([])
     const [keyCD, setKeyCD] = useState(Number)
 
-    const typingText = ExcuteApi.randomText(idx1)
     const baseTextOrg = pText.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true

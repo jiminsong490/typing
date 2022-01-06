@@ -9,7 +9,7 @@ import Share from '../kakao/Share'
 import Language from '../language/Language'
 import Mode from '../mode/Mode'
 
-const Typing = ({ token, pText }) => {
+const Typing = ({ token, pText, language }) => {
     const {
         oneText,
         wrongText,
@@ -97,7 +97,7 @@ const Typing = ({ token, pText }) => {
                 />
                 <Share />
                 <p>{data.name}</p>
-                <Language />
+                <Language language={language} />
                 <Mode />
             </form>
         </>

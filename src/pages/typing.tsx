@@ -7,12 +7,15 @@ import { useDispatch, useSelector } from '../redux/hooks'
 
 const typing = (props) => {
     const language = useSelector((store) => store.language)
-    const [lan, setlan] = useState('C')
     const typingText = ExcuteApi.randomText(language)
     return (
         <>
             {typingText && typingText != undefined && (
-                <Typing token={props.token} pText={typingText} />
+                <Typing
+                    token={props.token}
+                    pText={typingText}
+                    language={language}
+                />
             )}
         </>
     )
