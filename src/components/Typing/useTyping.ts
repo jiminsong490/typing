@@ -12,8 +12,9 @@ const useTyping = ({ pText, token }) => {
     const [bTN, setbTn] = useState(0)
     const [csPoint, setCsPoint] = useState(0)
     const [wrongText, setWrongText] = useState([])
+    const [keyCD, setKeyCD] = useState(Number)
 
-    const typingText = ExcuteApi.randomText(idx1)
+    // const typingText = ExcuteApi.randomText(idx1)
     const baseTextOrg = pText.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
     let spaceCheak = true
@@ -53,6 +54,7 @@ const useTyping = ({ pText, token }) => {
 
     const handleChange = (e) => {
         e.preventDefault()
+        if (hardMode && keyCD == 8) return
         setText(e.target.value)
         setWrongText([])
 
@@ -79,23 +81,19 @@ const useTyping = ({ pText, token }) => {
                 setCsPoint(0)
                 setWrongText([])
             }
-
             // console.log(oneText.length, e.target.value.length)
         }
     }
 
     const handleKeyDown = (e) => {
-        // console.log(e.keyCode)
-        console.log(e.keyCode)
+        e.preventDefault()
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
             setBack(backspace + 1)
         }
-        if (e.keyCode === 8 && hardMode) {
-            console.log('dds')
-            console.log(e.target)
-            return false
-        }
+        if (hardMode && e.keyCode === 8) {
+            setKeyCD(8)
+        } else setKeyCD(e.keyCode)
     }
 
     const handleClick = (e) => {

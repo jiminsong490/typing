@@ -25,7 +25,6 @@ const Typing = ({ token, pText }) => {
         data,
         handleClick,
     } = useTyping({ pText, token })
-
     const listItems = oneText.map((oneText, idx) => {
         let color = {
             color: 'black',

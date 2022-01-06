@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Typing from '../components/Typing/Typing'
 import cookies from 'next-cookies'
 import ExcuteApi from '../apis/ExcuteApi'
@@ -6,15 +6,9 @@ import { updateLanguage } from '../redux/rootReducer'
 import { useDispatch, useSelector } from '../redux/hooks'
 
 const typing = (props) => {
-    const [idx1, setIdx1] = useState('20')
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(updateLanguage('JAVA'))
-    }, [])
     const language = useSelector((store) => store.language)
-    const typingText = ExcuteApi.randomText(idx1)
-    console.log(language)
-
+    const [lan, setlan] = useState('C')
+    const typingText = ExcuteApi.randomText(language)
     return (
         <>
             {typingText && typingText != undefined && (

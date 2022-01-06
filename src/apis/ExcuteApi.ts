@@ -5,19 +5,26 @@ import XHR from './XHR'
 
 const apiAddress =
     process.env.APP_ENV === 'production'
-        ? 'typing.jiminproject.com'
-        : 'localhost'
+        ? 'http://typing.jiminproject.com'
+        : 'http://localhost'
 
 const ExcuteApi = {
     insertText: async (text) => {
-        const response = await XHR('post', `http://${apiAddress}:3712/exText`, {
+        const response = await XHR('post', `${apiAddress}:3712/exText`, {
             text: text,
         })
     },
-    randomText: (idx) => {
-        const { data, isValidating, error } = useSWR(
-            `http://${apiAddress}:3712/randomText?text=${idx}`
+    randomText: (language) => {
+        console.log(
+            'encode : ',
+            encodeURI(language),
+            '    language : ',
+            language
         )
+        const { data, isValidating, error } = useSWR(
+            `${apiAddress}:3712/randomText?language=${encodeURI(language)}`
+        )
+        console.log('EX')
         const text = data?.text
         return text
     },
@@ -27,7 +34,7 @@ const ExcuteApi = {
             email: String
         }
         const { data, isValidating, error } = useSWR<IToken>(
-            [`http://${apiAddress}:3712/checktoken`, token],
+            [`${apiAddress}:3712/checktoken`, token],
             (url, token) => fetcher(url, { token })
         )
         const name = data?.name
@@ -38,7 +45,7 @@ const ExcuteApi = {
     insertFile: async (file) => {
         const response = await XHR(
             'post',
-            `http://${apiAddress}:3712/fileUpload`,
+            `${apiAddress}:3712/fileUpload`,
             file
         )
     },
@@ -48,7 +55,7 @@ const ExcuteApi = {
         }
         const response = await XHR<ISignUp>(
             'post',
-            `http://${apiAddress}:3712/signup`,
+            `${apiAddress}:3712/signup`,
             {
                 email: email,
                 password: password,
@@ -71,7 +78,7 @@ const ExcuteApi = {
         }
         const response = await XHR<IDelete>(
             'delete',
-            `http://${apiAddress}:3712/delete`,
+            `${apiAddress}:3712/delete`,
             {
                 email: email,
                 password: password,
@@ -79,7 +86,7 @@ const ExcuteApi = {
         )
         if (response.data.success == true) {
             alert('계정이 성공적으로 탈퇴되었습니다.')
-            location.href = `http://${apiAddress}:3712/login`
+            location.href = `${apiAddress}:3712/login`
         } else {
             const errorMsg = response.data.errorMsg
             alert(
@@ -95,7 +102,7 @@ const ExcuteApi = {
         }
         const response = await XHR<IChange>(
             'put',
-            `http://${apiAddress}:3712/change`,
+            `${apiAddress}:3712/change`,
             {
                 email: email,
                 password: password,
@@ -104,7 +111,7 @@ const ExcuteApi = {
         )
         if (response.data.success == true) {
             alert('비밀번호가 성공적으로 변경되었습니다.')
-            location.href = `http://${apiAddress}:3712/login`
+            location.href = `${apiAddress}:3712/login`
         } else {
             const errorMsg = response.data.errorMsg
             alert(`${errorMsg}`)
@@ -117,7 +124,7 @@ const ExcuteApi = {
         }
         const response = await XHR<IFind>(
             'get',
-            `http://${apiAddress}:3712/findall?tel=${tel}&username=${username}`
+            `${apiAddress}:3712/findall?tel=${tel}&username=${username}`
         )
         console.log(response.data)
         if (response.data.result) alert(`아이디 : ${response.data.email}`)
@@ -128,14 +135,10 @@ const ExcuteApi = {
             token: String
             result: boolean
         }
-        const response = await XHR<ILogin>(
-            'post',
-            `http://${apiAddress}:3712/login`,
-            {
-                email: email,
-                password: password,
-            }
-        )
+        const response = await XHR<ILogin>('post', `${apiAddress}:3712/login`, {
+            email: email,
+            password: password,
+        })
         if (response.data.result) {
             const token = response.data.token
             document.cookie = `token=${token}`
