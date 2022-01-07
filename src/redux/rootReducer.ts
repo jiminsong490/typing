@@ -4,12 +4,16 @@ interface IState {
     language: String
     hardMode: boolean
     accuracy: number
+    typingLog: String
+    submit: boolean
 }
 
 const initialState: IState = {
-    language: 'JAVA',
+    language: 'C',
     hardMode: false,
     accuracy: 100,
+    typingLog: null,
+    submit: false,
 }
 
 export const typingStore = createSlice({
@@ -22,9 +26,16 @@ export const typingStore = createSlice({
         updateHardMode: (state, { payload }) => {
             state.hardMode = payload
         },
+        updateTypingLog: (state, { payload }) => {
+            state.typingLog = payload
+        },
+        updateSubmit: (state, { payload }) => {
+            state.submit = payload
+        },
     },
 })
 
-export const { updateLanguage, updateHardMode } = typingStore.actions
+export const { updateLanguage, updateHardMode, updateSubmit, updateTypingLog } =
+    typingStore.actions
 
 export default typingStore.reducer

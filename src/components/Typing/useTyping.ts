@@ -1,8 +1,10 @@
+import { useDispatch } from './../../redux/hooks'
 import { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import ExcuteApi from '../../apis/ExcuteApi'
 import { fetcher } from '../../pages/_app'
 import { useSelector } from '../../redux/hooks'
+import { updateSubmit } from '../../redux/rootReducer'
 
 const useTyping = ({ pText, token }) => {
     const [text, setText] = useState([])
@@ -12,6 +14,8 @@ const useTyping = ({ pText, token }) => {
     const [csPoint, setCsPoint] = useState(0)
     const [wrongText, setWrongText] = useState([])
     const [keyCD, setKeyCD] = useState(Number)
+
+    const dispatch = useDispatch()
 
     const baseTextOrg = pText.split('\n')
     const baseText = baseTextOrg.filter((baseText) => baseText != '\r')
@@ -47,6 +51,7 @@ const useTyping = ({ pText, token }) => {
             setbTn(bTN + 1)
             setCsPoint(0)
             setWrongText([])
+            dispatch(updateSubmit(true))
         }
     }
 
@@ -78,6 +83,7 @@ const useTyping = ({ pText, token }) => {
                 setbTn(bTN + 1)
                 setCsPoint(0)
                 setWrongText([])
+                dispatch(updateSubmit(true))
             }
 
             // console.log(oneText.length, e.target.value.length)
@@ -86,7 +92,6 @@ const useTyping = ({ pText, token }) => {
 
     const handleKeyDown = (e) => {
         // console.log(e.keyCode)
-        console.log(e.keyCode)
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
             setBack(backspace + 1)

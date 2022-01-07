@@ -8,6 +8,7 @@ import SpeedLog from '../clock/SpeedLog'
 import Share from '../kakao/Share'
 import Language from '../language/Language'
 import Mode from '../mode/Mode'
+import Log from '../log/Log'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -99,6 +100,7 @@ const Typing = ({ token, pText }) => {
                 <p>{data.name}</p>
                 <Language />
                 <Mode />
+                <Log />
             </form>
         </>
     )
