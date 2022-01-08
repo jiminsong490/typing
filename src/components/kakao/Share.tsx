@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect } from 'react'
 
 interface IProps {
@@ -19,4 +20,4 @@ const Share = () => {
         </>
     )
 }
-export default Share
+export default React.memo(Share)

@@ -10,9 +10,9 @@ const typing = (props) => {
     const typingText = ExcuteApi.randomText(language)
     return (
         <>
-            {typingText && typingText != undefined && (
+            {typingText ? (
                 <Typing token={props.token} pText={typingText} />
-            )}
+            ) : null}
         </>
     )
 }

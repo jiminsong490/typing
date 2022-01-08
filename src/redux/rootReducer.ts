@@ -1,10 +1,10 @@
 import { combineReducers, createSlice } from '@reduxjs/toolkit'
 
 interface IState {
-    language: String
+    language: string
     hardMode: boolean
     accuracy: number
-    typingLog: String
+    typingLog: string
     submit: boolean
 }
 
