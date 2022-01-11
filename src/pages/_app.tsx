@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 import React from 'react'
 import { SWRConfig } from 'swr'
 import { wrapper } from '../redux/store'
-// import GlobalStyle from '../styles/GlobalStyle'
+import GlobalStyle from '../styles/GlobalStyle'
 declare global {
     interface Window {
         Kakao: any
@@ -20,7 +20,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     await fetcher(resource, headers),
             }}
         >
-            {/* <GlobalStyle /> */}
+            <GlobalStyle />
             <Component {...pageProps} />
         </SWRConfig>
     )

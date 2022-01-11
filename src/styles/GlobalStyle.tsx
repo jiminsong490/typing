@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-    * {
+    /* * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -10,14 +10,14 @@ const GlobalStyle = createGlobalStyle`
     }
     html, body, #__next {
         height: 100%;
-    }
+    } */
     body{
-        background-color: #ffffff;
-        font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+        background-color: #e6e6e1;
+        /* font-family: 'Noto Sans KR', 'Roboto', sans-serif;
         font-weight: 400;
-        overflow: hidden;
+        overflow: hidden; */
     }
-    a, a:hover, a:active {
+    /* a, a:hover, a:active {
         color: inherit;
         text-decoration: none;
         outline: none;
@@ -41,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
         display: block;
         width: 100%;
         height: 100%;
-    }
+    } */
 `
 
 export default GlobalStyle

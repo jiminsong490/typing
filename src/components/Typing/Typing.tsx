@@ -8,6 +8,7 @@ import SpeedLog from '../clock/SpeedLog'
 import Language from '../language/Language'
 import Mode from '../mode/Mode'
 import Log from '../log/Log'
+// import styled from 'styled-components'
 import Share from '../kakao/Share'
 
 const Typing = ({ token, pText }) => {
@@ -26,17 +27,32 @@ const Typing = ({ token, pText }) => {
         data,
         handleClick,
     } = useTyping({ pText, token })
+
+    // const TestDiv = styled.div`
+    //     background: yellow;
+    //     & div {
+    //         color: red;
+    //         & span {
+    //             color: blue;
+    //         }
+    //     }
+    // `
+
     const listItems = oneText.map((oneText, idx) => {
-        let color = {
+        let style = {
+            fontFamily: 'inherit',
+            fontWeight: 'bold',
+            letterSpacing: -0.7,
+            display: 'flex : 2',
             color: 'black',
         }
         if (wrongText[idx] == true) {
-            color.color = 'green'
+            style.color = 'green'
         } else if (wrongText[idx] == false && text.length - 1 >= idx) {
-            color.color = 'red'
+            style.color = 'red'
         }
         return (
-            <a key={idx} style={color}>
+            <a key={idx} style={style}>
                 {oneText}
             </a>
         )
@@ -45,12 +61,28 @@ const Typing = ({ token, pText }) => {
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit}
-                method='post'
-                encType='multipart/form-data'
-            >
+            <form onSubmit={handleSubmit} method='post'>
+                {/* <TestDiv> */}
                 <div>
+                    <nav>
+                        <Link href='/login'>
+                            <a>
+                                <input
+                                    type='button'
+                                    name='login'
+                                    value='login'
+                                    style={{ display: 'flex:1' }}
+                                />
+                            </a>
+                        </Link>
+                        <input
+                            type='button'
+                            name='logout'
+                            value='logout'
+                            style={{ display: 'flex:1' }}
+                            onClick={handleClick}
+                        />
+                    </nav>
                     <div>{listItems}</div>
                     <div>
                         <input
@@ -62,21 +94,43 @@ const Typing = ({ token, pText }) => {
                             placeholder='위에 보이는 문장을 따라 타이핑해보세요.'
                             autoComplete='off'
                             style={{
-                                fontSize: '16px',
                                 position: 'relative',
                                 left: '-4px',
-                                letterSpacing: '0px',
-                                fontFamily: 'Malgun Gothic',
+                                fontFamily: 'inherit',
+                                fontWeight: 'bold',
+                                letterSpacing: -0.7,
+                                display: 'block',
+                                fontSize: 16,
                             }}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
                         />
                     </div>
                     <div>
-                        <p>{baseText[bTN + 1]}</p>
+                        <p
+                            style={{
+                                fontFamily: 'inherit',
+                                fontWeight: 'bold',
+                                letterSpacing: -0.7,
+                                display: 'block',
+                                color: 'black',
+                            }}
+                        >
+                            {baseText[bTN + 1]}
+                        </p>
                     </div>
                     <div>
-                        <p>{baseText[bTN + 2]}</p>
+                        <p
+                            style={{
+                                fontFamily: 'inherit',
+                                fontWeight: 'bold',
+                                letterSpacing: -0.7,
+                                display: 'block',
+                                color: 'black',
+                            }}
+                        >
+                            {baseText[bTN + 2]}
+                        </p>
                     </div>
                     <TypingSpeed count={typingCount} backspace={backspace} />
                     <SpeedLog />
@@ -85,22 +139,12 @@ const Typing = ({ token, pText }) => {
                 <div>
                     <FileUpload></FileUpload>
                 </div>
-                <Link href='/login'>
-                    <a>
-                        <input type='button' name='login' value='login' />
-                    </a>
-                </Link>
-                <input
-                    type='button'
-                    name='logout'
-                    value='logout'
-                    onClick={handleClick}
-                />
                 {/* <Share /> */}
                 <p>{data.name}</p>
                 <Language />
                 <Mode />
                 <Log />
+                {/* </TestDiv> */}
             </form>
         </>
     )
