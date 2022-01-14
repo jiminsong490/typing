@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from '../../redux/hooks'
 import { updateSubmit, updateTypingLog } from '../../redux/rootReducer'
 import useTime from './../../hooks/useTime'
-import SpeedLog from './SpeedLog'
 
 const TypingSpeed = (props) => {
     const [speed, setSpeed] = useState(0)

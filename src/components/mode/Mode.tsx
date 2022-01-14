@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from '../../redux/hooks'
 import { updateHardMode } from '../../redux/rootReducer'
+import styled from 'styled-components'
+
+const Asd = styled.div`
+    height: 50px;
+    input {
+        background-color: white;
+    }
+`
 
 const Mode = () => {
     const dispatch = useDispatch()
@@ -17,7 +25,13 @@ const Mode = () => {
     }
     return (
         <>
-            <input type='button' value={modeBTValue} onClick={handleClick} />
+            <Asd>
+                <input
+                    type='button'
+                    value={modeBTValue}
+                    onClick={handleClick}
+                />
+            </Asd>
         </>
     )
 }
