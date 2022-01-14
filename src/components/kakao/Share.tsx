@@ -6,7 +6,9 @@ interface IProps {
 }
 const Share = () => {
     useEffect(() => {
-        window.Kakao.init('869ceaaec4649ed9a6da41413eac0695')
+        if (!window.Kakao.isInitialized()) {
+            window.Kakao.init('869ceaaec4649ed9a6da41413eac0695')
+        }
     }, [])
     const handleClick = () => {
         const { Kakao, location } = window
@@ -21,3 +23,6 @@ const Share = () => {
     )
 }
 export default React.memo(Share)
+function useScript(arg0: string) {
+    throw new Error('Function not implemented.')
+}

@@ -102,7 +102,7 @@ const Typing = ({ token, pText }) => {
                 <section>
                     <FileUpload />
                 </section>
-                {/* <Share /> */}
+                <Share />
                 <section>
                     <p>{data.name}</p>
                 </section>

@@ -13,15 +13,12 @@ const GlobalStyle = createGlobalStyle`
     } */
     body{
         background-color: #e6e6e1;
-        flex-wrap: wrap-reverse;
-        /* font-family: 'Noto Sans KR', 'Roboto', sans-serif;
-        font-weight: 400;
-        overflow: hidden; */
     }
     section{
         background-color: #f4f4f4;
         border: 1px solid black;
         border-radius: 5px;
+        align-items: center;
     }
     input{
         border-color: white;
@@ -29,6 +26,14 @@ const GlobalStyle = createGlobalStyle`
     form{
         display:flex;
         justify-content: center;
+        flex-wrap: wrap;
+        width: 1100px;
+        height: 100px;
+    }
+    div{
+        display:flex;
+        justify-content: center;
+
     }
     /* a, a:hover, a:active {
         color: inherit;
