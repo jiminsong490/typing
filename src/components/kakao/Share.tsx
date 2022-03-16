@@ -26,3 +26,6 @@ const Share = () => {
     )
 }
 export default React.memo(Share)
+function useScript(arg0: string) {
+    throw new Error('Function not implemented.')
+}
