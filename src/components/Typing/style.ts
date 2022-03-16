@@ -4,5 +4,5 @@ export const testStyle = {
 
 export const shareStyle = {
     width: 48,
-    height: 48,
+    height: 30,
 }
