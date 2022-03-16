@@ -9,6 +9,7 @@ import Mode from '../mode/Mode'
 import Log from '../log/Log'
 import styled from 'styled-components'
 import Share from '../kakao/Share'
+import { testStyle } from './style'
 
 const Typing = ({ token, pText }) => {
     const {
@@ -27,24 +28,15 @@ const Typing = ({ token, pText }) => {
         handleClick,
     } = useTyping({ pText, token })
 
-    // const TestDiv = styled.div`
-    //     background: yellow;
-    //     & div {
-    //         color: red;
-    //         & span {
-    //             color: blue;
-    //         }
-    //     }
-    // `
-    // const Style = styled.a`
-    //     & a {
-    //         fontfamily: 'inherit';
-    //         fontweight: 'bold';
-    //         letterspacing: -0.7;
-    //         display: 'flex : 2';
-    //         color: 'black';
-    //     }
-    // `
+    const Container = styled.form`
+        background: yellow;
+        div {
+            color: red;
+            span {
+                color: blue;
+            }
+        }
+    `
 
     const listItems = oneText.map((oneText, idx) => {
         let style = {
@@ -70,8 +62,6 @@ const Typing = ({ token, pText }) => {
     return (
         <>
             <form onSubmit={handleSubmit} method='post'>
-                {/* <TestDiv> */}
-
                 <nav>
                     <Link href='/login'>
                         <a>
@@ -102,7 +92,9 @@ const Typing = ({ token, pText }) => {
                 <section>
                     <FileUpload />
                 </section>
-                {/* <Share /> */}
+                <section>
+                    <Share />
+                </section>
                 <section>
                     <p>{data.name}</p>
                 </section>
@@ -123,7 +115,7 @@ const Typing = ({ token, pText }) => {
                         ref={it}
                         type='text'
                         name='inputtext'
-                        value={text}
+                        // value={text}
                         size={50}
                         placeholder='위에 보이는 문장을 따라 타이핑해보세요.'
                         autoComplete='off'
@@ -136,7 +128,7 @@ const Typing = ({ token, pText }) => {
                             display: 'block',
                             fontSize: 16,
                         }}
-                        onChange={handleChange}
+                        // onChange={handleChange}
                         onKeyDown={handleKeyDown}
                     />
 
@@ -164,7 +156,6 @@ const Typing = ({ token, pText }) => {
                         {baseText[bTN + 2]}
                     </p>
                 </section>
-                {/* </TestDiv> */}
             </form>
         </>
     )

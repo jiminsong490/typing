@@ -92,13 +92,14 @@ const useTyping = ({ pText, token }) => {
 
     const handleKeyDown = (e) => {
         // console.log(e.keyCode)
+        // e.preventDefault()
         if (e.keyCode === 8 && csPoint > 0) {
             setCsPoint(csPoint - 1)
             setBack(backspace + 1)
         }
-        if (hardMode && e.keyCode === 8) {
-            setKeyCD(8)
-        } else setKeyCD(e.keyCode)
+        // if (hardMode && e.keyCode === 8) {
+        //     setKeyCD(8)
+        // } else setKeyCD(e.keyCode)
     }
 
     const handleClick = (e) => {
